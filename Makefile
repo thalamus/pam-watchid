@@ -1,6 +1,6 @@
-VERSION = 2
+PREFIX ?= /usr/local
 LIBRARY_NAME = pam_watchid.so
-DESTINATION = /usr/local/lib/pam
+DESTINATION = $(addprefix $(PREFIX), /lib/pam)
 TARGET = x86_64-apple-macosx10.15
 
 .PHONY: all
@@ -12,6 +12,4 @@ $(LIBRARY_NAME): watchid-pam-extension.swift
 .PHONY: install
 install: all
 	mkdir -p $(DESTINATION)
-	cp $(LIBRARY_NAME) $(DESTINATION)/$(LIBRARY_NAME).$(VERSION)
-	chmod 444 $(DESTINATION)/$(LIBRARY_NAME).$(VERSION)
-	chown root:wheel $(DESTINATION)/$(LIBRARY_NAME).$(VERSION)
+	cp $(LIBRARY_NAME) $(DESTINATION)/$(LIBRARY_NAME)
